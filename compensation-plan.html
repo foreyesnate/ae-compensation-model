@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your compensation plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Serif:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1C2321;
+  --ink-soft:#4A5450;
+  --sage:#7A8B7F;
+  --rule:#C8D2C9;
+  --wash:#EDF1EC;
+  --paper:#FBFAF7;
+  --brass:#A67C3D;
+  --ledger-red:#8F2A2A;
+  --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --serif:"IBM Plex Serif",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-weight:400;font-size:15px;line-height:1.6;
+}
+.sheet{max-width:1000px;margin:0 auto;padding:56px 32px 96px}
+
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--sage);margin:0 0 10px;
+}
+h1{
+  font-family:var(--serif);font-weight:300;font-size:38px;line-height:1.12;
+  letter-spacing:-.015em;margin:0 0 12px;
+}
+.standfirst{max-width:58ch;color:var(--ink-soft);margin:0 0 8px;font-size:16px}
+
+h2{
+  font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--sage);
+  margin:56px 0 18px;padding-bottom:8px;border-bottom:1px solid var(--rule);
+}
+h2 .n{color:var(--rule);margin-right:12px}
+
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:20px 24px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--sage);
+}
+.field input{
+  font-family:var(--mono);font-size:15px;color:var(--ink);
+  background:transparent;border:0;border-bottom:1px solid var(--ink);
+  padding:5px 2px;width:100%;
+}
+.field input:hover{background:var(--wash)}
+.field input:focus{outline:2px solid var(--brass);outline-offset:2px;background:var(--wash)}
+.field .hint{font-size:11px;color:var(--sage);font-family:var(--mono)}
+
+.lede{max-width:60ch;color:var(--ink-soft);font-size:14px;margin:0 0 22px}
+
+.tablewrap{overflow-x:auto;margin:0 -4px}
+table{width:100%;min-width:640px;border-collapse:collapse;font-family:var(--mono);font-size:13px}
+caption{caption-side:bottom;text-align:left;color:var(--sage);font-family:var(--sans);font-size:12px;padding-top:14px;line-height:1.5;max-width:78ch}
+thead th{
+  font-weight:500;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);
+  text-align:right;padding:0 10px 9px;border-bottom:1px solid var(--ink);white-space:nowrap;
+}
+thead th:first-child{text-align:left;padding-left:4px}
+tbody td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--rule);white-space:nowrap}
+tbody td:first-child{text-align:left;padding-left:4px}
+tbody tr.month.qstart td{background:var(--wash)}
+tbody tr.month:hover td{background:#E4EBE5}
+tfoot td{
+  padding:11px 10px;text-align:right;font-weight:500;
+  border-top:3px double var(--ink);border-bottom:0;
+}
+tfoot td:first-child{
+  text-align:left;padding-left:4px;
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);
+}
+.discl{
+  background:transparent;border:0;padding:0;margin:0;cursor:pointer;
+  font-family:var(--mono);font-size:13px;color:var(--ink);text-align:left;
+  display:inline-flex;align-items:baseline;gap:9px;
+}
+.discl .tw{color:var(--brass);width:9px;display:inline-block}
+.discl:hover .mo{border-bottom:1px solid var(--brass)}
+.discl:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+
+tr.detail td{background:var(--wash);padding:4px 4px 16px;border-bottom:1px solid var(--rule)}
+.clients{max-width:520px}
+.crow{display:grid;grid-template-columns:32px 1fr 1fr 1fr 30px;gap:10px;align-items:center;padding:5px 0}
+.crow.head span{
+  font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--sage);
+}
+.crow input{
+  font-family:var(--mono);font-size:13px;color:var(--ink);width:100%;
+  background:var(--paper);border:1px solid var(--rule);padding:5px 7px;
+}
+.crow input:focus{outline:2px solid var(--brass);outline-offset:1px;border-color:var(--brass)}
+.crow .fee{text-align:right;font-family:var(--mono);font-size:13px;color:var(--ink-soft)}
+.crow .idx{font-family:var(--mono);font-size:11px;color:var(--sage)}
+.kill{
+  background:transparent;border:0;color:var(--sage);cursor:pointer;font-size:15px;
+  line-height:1;padding:4px;font-family:var(--mono);
+}
+.kill:hover{color:var(--ledger-red)}
+.kill:focus-visible{outline:2px solid var(--brass);outline-offset:1px}
+.addbtn{
+  margin-top:9px;background:transparent;border:1px solid var(--rule);color:var(--ink);
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  padding:6px 12px;cursor:pointer;
+}
+.addbtn:hover{border-color:var(--ink);background:var(--paper)}
+.addbtn:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+.statements{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0}
+.statement{padding:26px 0 4px}
+.statement+.statement{border-top:1px solid var(--rule)}
+.statement h3{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--sage);font-weight:500;margin:0 0 4px;
+}
+.headline{font-family:var(--serif);font-weight:300;font-size:36px;letter-spacing:-.015em;line-height:1.1;margin:0 0 4px}
+.headline .unit{font-family:var(--mono);font-size:13px;color:var(--sage);letter-spacing:0;margin-left:8px}
+.gloss{color:var(--ink-soft);font-size:13px;max-width:46ch;margin:0 0 18px}
+.gloss+.gloss{margin-top:-8px}
+dl{margin:0;font-family:var(--mono);font-size:13px}
+.line{display:flex;justify-content:space-between;gap:20px;padding:7px 0;border-bottom:1px solid var(--rule)}
+.line dt{color:var(--ink-soft);font-family:var(--sans);font-size:13px}
+.line dd{margin:0;white-space:nowrap}
+.line.total{border-bottom:0;border-top:3px double var(--ink);margin-top:5px;padding-top:10px}
+.line.total dt{color:var(--ink)}
+.neg{color:var(--ledger-red)}
+
+@media(min-width:760px){
+  .statements{gap:0 44px;grid-template-columns:1fr 1fr}
+  .statement+.statement{border-top:0;border-left:1px solid var(--rule);padding-left:44px}
+}
+
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid var(--rule)}
+.toolbar button{
+  background:transparent;border:1px solid var(--ink);color:var(--ink);
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  padding:9px 16px;cursor:pointer;
+}
+.toolbar button:hover{background:var(--ink);color:var(--paper)}
+.toolbar button:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+
+footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--rule);color:var(--sage);font-size:12px;max-width:66ch}
+footer p{margin:0 0 8px}
+
+@media(max-width:640px){
+  .sheet{padding:36px 18px 72px}
+  h1{font-size:29px}
+  .headline{font-size:30px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media print{
+  body{background:#fff}
+  .toolbar,.discl .tw{display:none}
+  .sheet{padding:0;max-width:none}
+  tr.detail{display:none}
+}
+</style>
+</head>
+<body>
+<main class="sheet">
+
+  <p class="eyebrow">Compensation plan &middot; new business account executive</p>
+  <h1>How your commission works,<br>and what a full year could look like.</h1>
+  <p class="standfirst">Your pay has two parts: a base salary, and commission that scales upward as you pass quota. Everything below recalculates as you change it, so you can model your own scenarios rather than take our word for the numbers.</p>
+
+  <h2><span class="n">01</span>The terms</h2>
+  <div class="fields">
+    <div class="field"><label for="bs">Annual base</label><input type="number" id="bs" value="15000" step="500"></div>
+    <div class="field"><label for="q">Monthly quota</label><input type="number" id="q" value="1396" step="50"><span class="hint">new MRR</span></div>
+    <div class="field"><label for="sf">Setup fee</label><input type="number" id="sf" value="500" step="50"><span class="hint">per client</span></div>
+    <div class="field"><label for="otp">One-time rate</label><input type="number" id="otp" value="10" step="0.5"><span class="hint">% of fees</span></div>
+  </div>
+
+  <h2><span class="n">02</span>How commission scales</h2>
+  <p class="lede">Quota is measured in new monthly recurring revenue you sign. Commission is paid as a multiple of that monthly figure &mdash; sign a client at $349 a month at a 2.5&times; rate and you earn $873 once, not every month. The multiple rises in bands as you climb past quota, and reaching a higher band never reduces the rate on the revenue below it.</p>
+  <div class="fields">
+    <div class="field"><label for="t1">Below 70%</label><input type="number" id="t1" value="1.5" step="0.1"><span class="hint">&times; MRR</span></div>
+    <div class="field"><label for="t2">70 to 100%</label><input type="number" id="t2" value="2.5" step="0.1"><span class="hint">&times; MRR</span></div>
+    <div class="field"><label for="t3">100 to 130%</label><input type="number" id="t3" value="3.0" step="0.1"><span class="hint">&times; MRR</span></div>
+    <div class="field"><label for="t4">Above 130%</label><input type="number" id="t4" value="4.0" step="0.1"><span class="hint">&times; MRR</span></div>
+  </div>
+
+  <h2><span class="n">03</span>A sample year, month by month</h2>
+  <p class="lede">This scenario assumes you build to four new clients a month over your first three months. It is an illustration, not a target &mdash; open any month to change the clients and watch the year respond.</p>
+  <div class="tablewrap">
+    <table>
+      <caption>Cleanup months fill in automatically from the signing month: a January client has no prior months to catch up, a December client has eleven. Typing over the figure keeps your own number, which is how the two multi-year cleanups in June and October are set. Recurring revenue is counted from the signing month through December.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Month</th>
+          <th scope="col">Clients</th>
+          <th scope="col">New MRR</th>
+          <th scope="col">Attain.</th>
+          <th scope="col">One-time fees</th>
+          <th scope="col">Recurring</th>
+          <th scope="col">Commission</th>
+        </tr>
+      </thead>
+      <tbody id="tb"></tbody>
+      <tfoot>
+        <tr>
+          <td>Year</td>
+          <td id="f0">&mdash;</td>
+          <td id="f1">&mdash;</td>
+          <td id="f2">&mdash;</td>
+          <td id="f3">&mdash;</td>
+          <td id="f4">&mdash;</td>
+          <td id="f5">&mdash;</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <h2><span class="n">04</span>What you would earn</h2>
+  <div class="statements">
+
+    <section class="statement">
+      <h3>Gross pay for the year</h3>
+      <p class="headline" id="pay">&mdash;</p>
+      <p class="gloss">Before tax and withholding. The bottom line is your on-target earnings: what base plus recurring-revenue commission comes to if you hit quota exactly every month, no month above or below. Commission on setup and cleanup fees is earned on top of it.</p>
+      <dl>
+        <div class="line"><dt>Base salary</dt><dd id="p1">&mdash;</dd></div>
+        <div class="line"><dt>Commission on recurring revenue</dt><dd id="p2">&mdash;</dd></div>
+        <div class="line"><dt>Commission on setup and cleanup</dt><dd id="p3">&mdash;</dd></div>
+        <div class="line"><dt>Average monthly attainment</dt><dd id="p4">&mdash;</dd></div>
+        <div class="line total"><dt>On-target earnings, before fee commission</dt><dd id="p5">&mdash;</dd></div>
+      </dl>
+    </section>
+
+    <section class="statement">
+      <h3>How a month is paid</h3>
+      <p class="gloss">Commission is calculated on each month's signings on their own, so a strong month is never averaged away by a slow one.</p>
+      <p class="gloss">Setup and cleanup fees are paid at a flat rate and sit outside quota entirely. They never affect your attainment, which means a client who needs eighteen months of cleanup counts the same toward quota as one who needs none &mdash; there is no reason to hold a deal back.</p>
+      <p class="gloss">Because cleanup pricing grows every month a prospect waits, signing sooner is cheaper for them. That is a real reason for a client to move, and it is yours to use.</p>
+    </section>
+
+  </div>
+
+  <h2><span class="n">05</span>What the business earns</h2>
+  <div class="statements">
+    <section class="statement">
+      <h3>Return on your compensation</h3>
+      <p class="headline" id="roi" data-unit="on your pay">&mdash;</p>
+      <p class="gloss">Revenue from the clients in this sample year, measured against what you are paid to sign them. Delivery cost is not subtracted, so this is the return against sales cost rather than profit.</p>
+      <dl>
+        <div class="line"><dt>Recurring billed in year one</dt><dd id="c1">&mdash;</dd></div>
+        <div class="line"><dt>Setup and cleanup collected</dt><dd id="c2">&mdash;</dd></div>
+        <div class="line"><dt>Your total pay</dt><dd id="c3">&mdash;</dd></div>
+        <div class="line"><dt>Your pay as % of that revenue</dt><dd id="c4">&mdash;</dd></div>
+        <div class="line total"><dt>Net to the business</dt><dd id="c5">&mdash;</dd></div>
+      </dl>
+    </section>
+    <section class="statement">
+      <h3>Why we are showing you this</h3>
+      <p class="gloss">You should be able to see the economics you are working inside, not just your own line of them. It is the same arithmetic we use on our side.</p>
+      <p class="gloss">Year one collects only part of the recurring revenue, because a client signed in October barely bills before December. The following year collects the full amount from everyone still on the books, with no commission attached &mdash; that has already been paid. Which is why a client who stays is worth so much more than one who does not.</p>
+    </section>
+  </div>
+
+  <div class="toolbar">
+    <button type="button" id="csv">Download the table as CSV</button>
+    <button type="button" id="reset">Reset to the sample year</button>
+  </div>
+
+  <footer>
+    <p>Recurring revenue assumes billing begins in the signing month and that no client cancels during the year. Cleanup fees are calculated as the monthly rate multiplied by the months of cleanup, divided by two. The one-time rate applies to setup and cleanup fees combined.</p>
+    <p>This model is for illustration and discussion. The written plan governs.</p>
+  </footer>
+
+</main>
+
+<script>
+var MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+var ABBR=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var open={},months=[],tb=document.getElementById("tb");
+
+function seed(){
+  months=[];
+  for(var m=0;m<12;m++){
+    var n=m===0?1:(m===1?2:(m===2?3:4)),cl=[];
+    for(var i=0;i<n;i++){cl.push({mrr:(m>=3&&i===3)?649:349,cu:null});}
+    months.push(cl);
+  }
+  months[5][0].cu=24;
+  months[9][0].cu=24;
+}
+
+function money(n){
+  var r=Math.round(n);
+  if(r<0){return "("+Math.abs(r).toLocaleString()+")";}
+  return r.toLocaleString();
+}
+function dollars(n){
+  var r=Math.round(n);
+  if(r<0){return "($"+Math.abs(r).toLocaleString()+")";}
+  return "$"+r.toLocaleString();
+}
+function num(id){var e=document.getElementById(id);if(!e)return 0;var v=parseFloat(e.value);return isNaN(v)?0:v;}
+function put(id,v,neg){
+  var e=document.getElementById(id);
+  if(!e)return;
+  e.textContent=v;
+  e.classList.toggle("neg",!!neg);
+}
+function putUnit(id,v,neg){
+  var e=document.getElementById(id);
+  if(!e)return;
+  var u=e.getAttribute("data-unit")||"";
+  e.textContent=v;
+  e.classList.toggle("neg",!!neg);
+  if(u){e.insertAdjacentHTML("beforeend",'<span class="unit">'+u+'</span>');}
+}
+function out(key,v){
+  var e=tb.querySelector('[data-o="'+key+'"]');
+  if(e)e.textContent=v;
+}
+function tiers(){return [num("t1"),num("t2"),num("t3"),num("t4")];}
+
+function commission(mrr,q,R){
+  var edges=[[0,0.7],[0.7,1],[1,1.3],[1.3,Infinity]],total=0;
+  for(var i=0;i<4;i++){
+    var lo=edges[i][0]*q,hi=edges[i][1]===Infinity?Infinity:edges[i][1]*q;
+    total+=Math.max(0,Math.min(mrr,hi)-lo)*R[i];
+  }
+  return total;
+}
+
+function monthFigures(m){
+  var sf=num("sf"),cl=months[m],mrr=0,one=cl.length*sf;
+  for(var i=0;i<cl.length;i++){
+    var cu=cl[i].cu===null?m:cl[i].cu;
+    mrr+=cl[i].mrr;
+    one+=cl[i].mrr*cu/2;
+  }
+  return {clients:cl.length,mrr:mrr,one:one,rec:mrr*(12-m)};
+}
+
+function build(){
+  var rows="";
+  for(var m=0;m<12;m++){
+    rows+='<tr class="month'+(m%3===0?" qstart":"")+'"><td>'
+      +'<button type="button" class="discl" data-m="'+m+'" aria-expanded="'+(open[m]?"true":"false")+'">'
+      +'<span class="tw" aria-hidden="true">'+(open[m]?"\u2212":"+")+'</span>'
+      +'<span class="mo">'+ABBR[m]+'</span></button></td>'
+      +'<td data-o="cl'+m+'"></td><td data-o="mrr'+m+'"></td><td data-o="att'+m+'"></td>'
+      +'<td data-o="one'+m+'"></td><td data-o="rec'+m+'"></td><td data-o="cm'+m+'"></td></tr>';
+    if(open[m]){
+      var d='<tr class="detail"><td colspan="7"><div class="clients">'
+        +'<div class="crow head"><span></span><span>Monthly rate</span><span>Cleanup months</span>'
+        +'<span style="text-align:right">Cleanup fee</span><span></span></div>';
+      for(var j=0;j<months[m].length;j++){
+        var cli=months[m][j],cuv=cli.cu===null?m:cli.cu;
+        d+='<div class="crow"><span class="idx">'+(j+1)+'</span>'
+          +'<input type="number" step="10" value="'+cli.mrr+'" data-m="'+m+'" data-j="'+j+'" data-f="mrr" aria-label="Monthly rate for client '+(j+1)+' in '+MONTHS[m]+'">'
+          +'<input type="number" step="1" min="0" value="'+cuv+'" data-m="'+m+'" data-j="'+j+'" data-f="cu" aria-label="Cleanup months for client '+(j+1)+' in '+MONTHS[m]+'">'
+          +'<span class="fee" data-o="fee'+m+'_'+j+'"></span>'
+          +'<button type="button" class="kill" data-del="'+m+'.'+j+'" aria-label="Remove client '+(j+1)+' from '+MONTHS[m]+'">&times;</button></div>';
+      }
+      d+='<button type="button" class="addbtn" data-add="'+m+'">Add a client to '+ABBR[m]+'</button>'
+        +'</div></td></tr>';
+      rows+=d;
+    }
+  }
+  tb.innerHTML=rows;
+  recalc();
+}
+
+function recalc(){
+  var R=tiers(),q=num("q")||1,rate=num("otp")/100,base=num("bs");
+  var tCl=0,tMrr=0,tOne=0,tRec=0,tCm=0,tAtt=0;
+
+  for(var m=0;m<12;m++){
+    var f=monthFigures(m);
+    var c=commission(f.mrr,q,R)+f.one*rate,att=f.mrr/q;
+    tCl+=f.clients;tMrr+=f.mrr;tOne+=f.one;tRec+=f.rec;tCm+=c;tAtt+=att;
+
+    out("cl"+m,f.clients);
+    out("mrr"+m,money(f.mrr));
+    out("att"+m,Math.round(att*100)+"%");
+    out("one"+m,money(f.one));
+    out("rec"+m,money(f.rec));
+    out("cm"+m,money(c));
+
+    if(open[m]){
+      for(var j=0;j<months[m].length;j++){
+        var cli=months[m][j],cuv=cli.cu===null?m:cli.cu;
+        out("fee"+m+"_"+j,dollars(cli.mrr*cuv/2));
+      }
+    }
+  }
+
+  var cOne=tOne*rate,cMrr=tCm-cOne;
+  var pay=base+tCm,rev=tRec+tOne,net=rev-pay;
+  var atQuota=base+commission(q,q,R)*12,runrate=tMrr*12;
+  var avgAtt=Math.round(100*tAtt/12)+"%";
+
+  put("f0",tCl);put("f1",money(tMrr));put("f2",avgAtt);
+  put("f3",money(tOne));put("f4",money(tRec));put("f5",money(tCm));
+
+  put("pay",dollars(pay));
+  put("p1",dollars(base));put("p2",dollars(cMrr));put("p3",dollars(cOne));
+  put("p4",avgAtt);put("p5",dollars(atQuota));
+
+  putUnit("roi",(pay>0?Math.round(100*net/pay)+"%":"\u2014"),net<0);
+  put("c1",dollars(tRec));put("c2",dollars(tOne));put("c3",dollars(pay));
+  put("c4",rev>0?(100*pay/rev).toFixed(1)+"%":"\u2014");
+  put("c5",dollars(net),net<0);
+
+  putUnit("rr",dollars(runrate));
+  put("k1",tCl+" clients");put("k2",dollars(tMrr)+" / mo");put("k3",dollars(runrate*0.7));
+}
+
+tb.addEventListener("click",function(e){
+  var t=e.target.closest("button");
+  if(!t)return;
+  if(t.classList.contains("discl")){
+    var m=t.getAttribute("data-m");
+    open[m]=!open[m];
+    build();
+    var again=tb.querySelector('.discl[data-m="'+m+'"]');
+    if(again)again.focus();
+    return;
+  }
+  if(t.hasAttribute("data-del")){
+    var p=t.getAttribute("data-del").split(".");
+    if(months[+p[0]].length>1){months[+p[0]].splice(+p[1],1);build();}
+    return;
+  }
+  if(t.hasAttribute("data-add")){
+    var am=+t.getAttribute("data-add");
+    months[am].push({mrr:349,cu:null});
+    build();
+  }
+});
+
+tb.addEventListener("input",function(e){
+  var m=e.target.getAttribute("data-m"),j=e.target.getAttribute("data-j"),f=e.target.getAttribute("data-f");
+  if(m===null||j===null||!f)return;
+  months[+m][+j][f]=parseFloat(e.target.value)||0;
+  recalc();
+});
+
+["bs","q","sf","otp","t1","t2","t3","t4"].forEach(function(id){
+  var e=document.getElementById(id);
+  if(e)e.addEventListener("input",recalc);
+});
+
+document.getElementById("reset").addEventListener("click",function(){
+  seed();open={};
+  var d={bs:15000,q:1396,sf:500,otp:10,t1:1.5,t2:2.5,t3:3,t4:4};
+  for(var k in d){var e=document.getElementById(k);if(e)e.value=d[k];}
+  build();
+});
+
+document.getElementById("csv").addEventListener("click",function(){
+  var R=tiers(),q=num("q")||1,rate=num("otp")/100;
+  var out=[["Month","Clients","New MRR","Attainment %","One-time fees","Recurring","Commission"]];
+  for(var m=0;m<12;m++){
+    var f=monthFigures(m),c=commission(f.mrr,q,R)+f.one*rate;
+    out.push([MONTHS[m],f.clients,f.mrr.toFixed(2),Math.round(100*f.mrr/q),f.one.toFixed(2),f.rec.toFixed(2),c.toFixed(2)]);
+  }
+  var body=out.map(function(r){return r.join(",");}).join("\n");
+  var url=URL.createObjectURL(new Blob([body],{type:"text/csv"}));
+  var a=document.createElement("a");
+  a.href=url;a.download="compensation-plan.csv";a.click();
+  URL.revokeObjectURL(url);
+});
+
+seed();
+build();
+</script>
+</body>
+</html>
